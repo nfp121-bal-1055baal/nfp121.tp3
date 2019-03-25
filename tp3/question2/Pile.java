@@ -6,8 +6,8 @@ import question1.PileVideException;
 /**
  * A remplacer en partie par votre classe Pile de la question 1.
  * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @Antonio Semaan (votre nom)
+ * @25-3-2019 (un numéro de version ou une date)
  */
 public class Pile implements PileI {
 
@@ -15,50 +15,74 @@ public class Pile implements PileI {
     private int ptr;
 
     public Pile(int taille) {
-        // traiter le cas <=0
-        // a completer
+        zone= taille>0?new Object[taille]:new Object[CAPACITE_PAR_DEFAUT];
+        ptr=0;
     }
 
     public Pile() {
-        this(0);
+        this(CAPACITE_PAR_DEFAUT);
     }
 
     public void empiler(Object o) throws PilePleineException {
-        // a completer
+        if(estPleine())
+            throw new PilePleineException();
+        zone[ptr++]=o;
     }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        if(estVide())
+            throw new PileVideException();
+        return zone[--ptr];
     }
 
     public Object sommet() throws PileVideException {
-        // a completer
-        return null;
+        if(estVide())
+            throw new PileVideException();
+        return zone[ptr-1];
     }
 
     public int capacite() {
-        // a completer
-        return -1;
+        return zone.length;
     }
 
     public int taille() {
-        // a completer
-        return -1;
+        return ptr;
     }
 
     public boolean estVide() {
-        // a completer
-        return false;
+        return ptr==0;
     }
 
     public boolean estPleine() {
-        // a completer
-        return false;
+        return ptr == zone.length;
     }
 
     public boolean equals(Object o) {
-        // a completer
+        if(o instanceof Pile){
+            Pile p = (Pile) o;
+            if(taille()!=p.taille()||capacite()!=p.capacite())
+                return false;
+            try{
+                if(taille()==0)
+                    return true;
+                Pile pile1temp = (Pile)clone();
+                Pile pile2temp = (Pile) p.clone();
+                for(int i=0;i<taille();i++){
+                    
+                    if(!pile1temp.depiler().equals(pile2temp.depiler())){
+                        return false;
+                    }
+                }
+                
+            }
+            catch(CloneNotSupportedException e){
+                e.printStackTrace();
+            }
+            catch(PileVideException e){
+                e.printStackTrace();
+            }
+            return true;
+        }
         return false;
     }
 
@@ -68,7 +92,14 @@ public class Pile implements PileI {
     }
 
     public String toString() {
-        // a completer
-        return null;
+        String out = "[";
+        for (int i = ptr - 1; i >= 0; i--) {
+            out+=zone[i].toString();
+            if (i > 0)
+                out+=", ";
+        }
+        out+="]";
+        return out;
+        
     }
 }

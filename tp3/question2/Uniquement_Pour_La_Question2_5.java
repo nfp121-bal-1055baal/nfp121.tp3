@@ -1,5 +1,6 @@
 package question2;
 
+
 public class Uniquement_Pour_La_Question2_5 extends junit.framework.TestCase{
     public void test_equals_question2_5() throws Exception{
         // sÃ©lection de la zone commentÃ©e ci-dessous, puis F7 sous bluej, si vous adoptez la mÃ©thode equals de Q2.5
@@ -44,4 +45,15 @@ public class Uniquement_Pour_La_Question2_5 extends junit.framework.TestCase{
         // assertTrue(p1.equals(p2) && p2.equals(p3) && p1.equals(p3));
         // assertTrue(p2.equals(p3) && p3.equals(p4) && p2.equals(p4));
     }
+    /*1ere partie de la question:
+     * l'usage du hashcode dans equals m'est pas trop precis car:
+     * si equals(Object) retourne true -> alors les hashcodes des deux objets à comparer doivent etre identique
+     * mais si les deux hashcodes des deux objets à comparer sont identique -/-> la methode equals peut retourner false;
+     * alors l'usage de hashcode n'est pas correcte.
+     * 
+     * 2eme partie de la question:
+     * l'usage de la methode toString() n'est pas correcte parce que cela va comparer la representation des objets en String
+     * et pas les objets eux meme
+     */
+    
 }

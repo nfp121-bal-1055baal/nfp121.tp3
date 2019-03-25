@@ -11,66 +11,111 @@ import java.util.Vector;
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Pile3 implements PileI {
+public class Pile3 implements PileI,Cloneable {
 
-	private Vector<Object> v;
+    private Vector<Object> v;
+    
+    private int ptr;
+    
+    public Pile3() {
+        this(0);
+    }
 
-	public Pile3() {
-		this(0);
-	}
+    public Pile3(int taille) {
+        
+        v = taille>0?new Vector<Object>(taille):new Vector<Object>(CAPACITE_PAR_DEFAUT);
+        ptr=0;
+    }
 
-	public Pile3(int taille) {
-		// traiter le cas <=0
-		// à compléter
-	}
+    public void empiler(Object o) throws PilePleineException {
+        if(ptr==v.capacity())
+            throw new PilePleineException();
+        v.add(ptr++, o);
+    }
 
-	public void empiler(Object o) throws PilePleineException {
-		// à compléter
-	}
+    public Object depiler() throws PileVideException {
+        if(ptr==0)  //on ne peut pas utiliserv.isEmpty() car on utilise un
+                    //index de contenu du pile et on ne depile PAS vraiment 
+                    //les contenu du Vector
+            throw new PileVideException();
+        return v.get(--ptr);
+    }
 
-	public Object depiler() throws PileVideException {
-		// à compléter
-		return null;
-	}
+    public Object sommet() throws PileVideException {
+        if(ptr==0)
+            throw new PileVideException();
+        return v.get(ptr-1);
+    }
 
-	public Object sommet() throws PileVideException {
-		// à compléter
-		return null;
-	}
+    public int taille() {
+        return ptr;
+    }
 
-	public int taille() {
-		// à compléter
-		return -1;
-	}
+    public int capacite() {
+        return v.capacity();
+    }
 
-	public int capacite() {
-		// à compléter
-		return -1;
-	}
+    public boolean estVide() {
+        return ptr==0;
+    }
 
-	public boolean estVide() {
-		// à compléter
-		return false;
-	}
+    public boolean estPleine() {
+        return ptr==v.capacity();
+    }
 
-	public boolean estPleine() {
-		// à compléter
-		return false;
-	}
+    public String toString() {
+        String s = "[";
+         
+        for(int i=ptr-1;i>=0;i--){
+            s+=v.get(i).toString();
+            if (i>0)
+                s+=", ";
+        }
+    
+        return s + "]";
+    }
 
-	public String toString() {
-		// à compléter
-		return "";
-	}
+    public boolean equals(Object o) {
+        if(o instanceof Pile3){
+            Pile3 p = (Pile3) o;
+            if(taille()!=p.taille()||capacite()!=p.capacite())
+                return false;
+            try{
+                if(taille()==0)
+                    return true;
+                Pile3 pile1temp = (Pile3)clone();
+                Pile3 pile2temp = (Pile3) p.clone();
+                for(int i=0;i<taille();i++){
+                    
+                    if(!pile1temp.depiler().equals(pile2temp.depiler())){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch(CloneNotSupportedException e){
+                e.printStackTrace();
+            }
+            catch(PileVideException e){
+                e.printStackTrace();
+            }
+            
+        }
+        return false;
+    }
 
-	public boolean equals(Object o) {
-		// à compléter
-		return false;
-	}
-
-	// fonction fournie
-	public int hashCode() {
-		return toString().hashCode();
-	}
-
+    // fonction fournie
+    public int hashCode() {
+        return toString().hashCode();
+    }
+    
+    //implementing deep cloning:
+    public Object clone() throws CloneNotSupportedException{
+        Pile3 p = (Pile3) super.clone();
+        p.setVector((Vector) v.clone());
+        return p;
+    }
+    private void setVector(Vector v){
+        this.v=v;
+    }
 }

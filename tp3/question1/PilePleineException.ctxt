@@ -1,4 +1,8 @@
 #BlueJ class context
 comment0.target=PilePleineException
-comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ PilePleineException\ ici.\r\n\ \r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
-numComments=1
+comment0.text=\r\n\ D\u00C3\u00A9crivez\ votre\ classe\ PilePleineException\ ici.\r\n\ \r\n\ @Antonio\ Semaan\ (votre\ nom)\r\n\ @25-3-2019\ (un\ num\u00C3\u00A9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=s
+comment1.target=PilePleineException(java.lang.String)
+comment2.params=
+comment2.target=PilePleineException()
+numComments=3
