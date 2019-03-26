@@ -3,7 +3,7 @@ package question2;
 import question1.PilePleineException;
 import question1.PileVideException;
 
-public interface PileI {
+public interface PileI{
   
     public final static int CAPACITE_PAR_DEFAUT = 6;
     

@@ -76,15 +76,15 @@ public class Pile3 implements PileI,Cloneable {
     }
 
     public boolean equals(Object o) {
-        if(o instanceof Pile3){
-            Pile3 p = (Pile3) o;
+        if(o instanceof PileI){
+            PileI p = (PileI) o;
             if(taille()!=p.taille()||capacite()!=p.capacite())
                 return false;
             try{
                 if(taille()==0)
                     return true;
-                Pile3 pile1temp = (Pile3)clone();
-                Pile3 pile2temp = (Pile3) p.clone();
+                PileI pile1temp = (Pile3)clone();
+                PileI pile2temp = findClassAndClone(o);
                 for(int i=0;i<taille();i++){
                     
                     if(!pile1temp.depiler().equals(pile2temp.depiler())){
@@ -118,4 +118,16 @@ public class Pile3 implements PileI,Cloneable {
     private void setVector(Vector v){
         this.v=v;
     }
+    private PileI findClassAndClone(Object o) throws CloneNotSupportedException{
+        if(o instanceof Pile){
+            return (PileI)((Pile)o).clone();
+        }else if(o instanceof Pile2){
+            return (PileI)((Pile2)o).clone();
+        }else if(o instanceof Pile3){
+            return (PileI)((Pile3)o).clone();
+        }else{
+            return (PileI)((Pile4)o).clone();
+        }
+    }
+    
 }

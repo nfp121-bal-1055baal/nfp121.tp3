@@ -131,14 +131,14 @@ public class Pile4 implements PileI, Cloneable {
 
     public boolean equals(Object o) {
         if (o instanceof Pile4) {
-            Pile4 p = (Pile4) o;
+            PileI p = (PileI) o;
             if(taille()!=p.taille()||capacite()!=p.capacite())
                 return false;
             try{
                 if(capacite()==0)
                     return true;
-                Pile4 pile1temp = (Pile4)clone();
-                Pile4 pile2temp = (Pile4) p.clone();
+                PileI pile1temp = (Pile4)clone();
+                PileI pile2temp = findClassAndClone(o);
                 for(int i=0;i<taille();i++){
                     
                     if(!pile1temp.depiler().equals(pile2temp.depiler())){
@@ -198,5 +198,16 @@ public class Pile4 implements PileI, Cloneable {
             
         }
         
+    }
+    private PileI findClassAndClone(Object o) throws CloneNotSupportedException{
+        if(o instanceof Pile){
+            return (PileI)((Pile)o).clone();
+        }else if(o instanceof Pile2){
+            return (PileI)((Pile2)o).clone();
+        }else if(o instanceof Pile3){
+            return (PileI)((Pile3)o).clone();
+        }else{
+            return (PileI)((Pile4)o).clone();
+        }
     }
 }

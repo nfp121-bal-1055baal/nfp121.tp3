@@ -98,15 +98,15 @@ public class Pile2 implements PileI,Cloneable {
     }
 
     public boolean equals(Object o) {
-        if(o instanceof Pile2){
-            Pile2 p = (Pile2) o;
+        if(o instanceof PileI){
+            PileI p = (PileI) o;
             if(taille()!=p.taille()||capacite()!=p.capacite())
                 return false;
             try{
                 if(taille()==0)
                     return true;
-                Pile2 pile1temp = (Pile2)clone();
-                Pile2 pile2temp = (Pile2) p.clone();
+                PileI pile1temp = (Pile2)clone();
+                PileI pile2temp = findClassAndClone(o);
                 for(int i=0;i<taille();i++){
                     
                     if(!pile1temp.depiler().equals(pile2temp.depiler())){
@@ -158,5 +158,16 @@ public class Pile2 implements PileI,Cloneable {
     //methode essentielle pour deep cloning
     private void setstk(Stack s){
         stk=s;
+    }
+    private PileI findClassAndClone(Object o) throws CloneNotSupportedException{
+        if(o instanceof Pile){
+            return (PileI)((Pile)o).clone();
+        }else if(o instanceof Pile2){
+            return (PileI)((Pile2)o).clone();
+        }else if(o instanceof Pile3){
+            return (PileI)((Pile3)o).clone();
+        }else{
+            return (PileI)((Pile4)o).clone();
+        }
     }
 } // Pile2.java
