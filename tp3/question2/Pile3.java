@@ -30,6 +30,8 @@ public class Pile3 implements PileI,Cloneable {
     public void empiler(Object o) throws PilePleineException {
         if(ptr==v.capacity())
             throw new PilePleineException();
+        if(o==null)
+            return;
         v.add(ptr++, o);
     }
 

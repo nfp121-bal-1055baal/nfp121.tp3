@@ -26,6 +26,8 @@ public class Pile implements PileI, Cloneable {
     public void empiler(Object o) throws PilePleineException {
         if(estPleine())
             throw new PilePleineException();
+        if(o==null)
+            return;
         zone[ptr++]=o;
     }
 

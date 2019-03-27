@@ -31,6 +31,8 @@ public class Pile2 implements PileI,Cloneable {
     public void empiler(Object o) throws PilePleineException {
         if(taille==capacite)
             throw new PilePleineException();
+        if(o==null)
+        return;
         stk.push(o);
         taille++;
     }

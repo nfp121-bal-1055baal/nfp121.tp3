@@ -66,6 +66,8 @@ public class Pile4 implements PileI, Cloneable {
     public void empiler(Object o) throws PilePleineException {
         if (estPleine())
             throw new PilePleineException();
+        if(o==null)
+            return;
         if(estVide())
             stk=new Maillon(o,null);
         else
